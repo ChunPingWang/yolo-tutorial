@@ -189,12 +189,23 @@ python src/benchmark.py --weights models/yolo11n.pt --warmup 20 --iters 200
 
 ### RTX 4060 Laptop GPU 實測效能
 
-| 模型 | 格式 | FPS | 平均延遲 (ms) | P95 延遲 (ms) |
-|------|------|-----|--------------|--------------|
-| yolo11n | PyTorch FP32 | 113.7 | 8.80 | 11.31 |
-| yolo11n | TensorRT FP16 | 214.0 | 4.67 | 5.47 |
+| 模型 | 格式 | FPS | 平均延遲 (ms) | P50 延遲 (ms) | P95 延遲 (ms) | 加速比 |
+|------|------|-----|--------------|--------------|--------------|--------|
+| yolo11n | PyTorch FP32 | 118.1 | 8.46 | 7.52 | 11.45 | 1.0x |
+| yolo11n | TensorRT FP16 | 197.7 | 5.06 | 4.39 | 8.11 | 1.67x |
 
-> 實測環境：Windows 11, Driver 571.96, CUDA 12.8, TensorRT 10.9.0, 640x640 輸入。
+> 實測環境：Windows 11, Driver 571.96, CUDA 12.8, TensorRT 10.9.0, 640x640 輸入，50 次迭代。
+
+### 驗證紀錄
+
+所有腳本皆已於本機實際執行驗證（2026-07-19）：
+
+| 腳本 | 狀態 | 驗證結果 |
+|------|------|----------|
+| `src/detect_image.py` | ✅ 通過 | 偵測到 5 個物體（4 persons, 1 bus） |
+| `src/detect_camera.py` | ✅ 通過 | 攝影機開啟成功 (480x640)，即時推論正常 |
+| `src/export_tensorrt.py` | ✅ 通過 | 匯出 FP16 engine 9.8 MB，耗時 232 秒 |
+| `src/benchmark.py` | ✅ 通過 | PyTorch 118.1 FPS / TensorRT 197.7 FPS |
 
 ---
 

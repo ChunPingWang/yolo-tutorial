@@ -88,6 +88,9 @@ pip install ultralytics
 # 安裝其他相依套件
 pip install opencv-python onnx onnxruntime-gpu
 
+# 安裝 TensorRT (CUDA 12.x)
+pip install tensorrt==10.9.0.34
+
 # 驗證 CUDA 是否可用
 python -c "import torch; print(f'CUDA available: {torch.cuda.is_available()}'); print(f'Device: {torch.cuda.get_device_name(0)}')"
 ```
@@ -183,17 +186,14 @@ python src/benchmark.py --weights models/yolo11n.pt --warmup 20 --iters 200
 - P50 / P95 / P99 延遲
 - 吞吐量 (FPS)
 
-### RTX 4060 Laptop GPU 預期效能參考
+### RTX 4060 Laptop GPU 實測效能
 
-| 模型 | 格式 | FPS (預估) | 延遲 (ms) |
-|------|------|-----------|-----------|
-| yolo11n | PyTorch FP32 | ~120 | ~8 |
-| yolo11n | TensorRT FP16 | ~250 | ~4 |
-| yolo11n | TensorRT INT8 | ~300 | ~3.3 |
-| yolo11l | PyTorch FP32 | ~40 | ~25 |
-| yolo11l | TensorRT FP16 | ~90 | ~11 |
+| 模型 | 格式 | FPS | 平均延遲 (ms) | P95 延遲 (ms) |
+|------|------|-----|--------------|--------------|
+| yolo11n | PyTorch FP32 | 113.7 | 8.80 | 11.31 |
+| yolo11n | TensorRT FP16 | 214.0 | 4.67 | 5.47 |
 
-> 以上為預估值，實際效能取決於系統溫度、電源模式與背景負載。
+> 實測環境：Windows 11, Driver 571.96, CUDA 12.8, TensorRT 10.9.0, 640x640 輸入。
 
 ---
 

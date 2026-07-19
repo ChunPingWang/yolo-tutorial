@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# 虛擬環境
+venv/
+env/
+.conda/
+
+# 模型檔案 (太大不適合 git)
+models/*.pt
+models/*.onnx
+models/*.engine
+models/*.trt
+
+# 輸出結果
+output/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 資料集
+data/coco*/
+data/*.zip

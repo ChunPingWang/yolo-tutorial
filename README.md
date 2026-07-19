@@ -68,16 +68,17 @@ TensorRT 是 NVIDIA 的推論優化引擎，透過以下方式加速：
 
 ### 前置需求
 
-- Python 3.10+ (建議使用 [Miniconda](https://docs.conda.io/en/latest/miniconda.html))
+- Python 3.10+（本機已安裝 Python 3.12）
 - NVIDIA Driver 已安裝 (本機: 571.96)
 - Git
 
 ### 安裝步驟
 
 ```bash
-# 建立虛擬環境
-conda create -n yolo python=3.10 -y
-conda activate yolo
+# 建立虛擬環境（使用 Python 內建 venv）
+python -m venv venv
+venv\Scripts\activate        # Windows CMD
+# 或 source venv/Scripts/activate  # Git Bash
 
 # 安裝 PyTorch (CUDA 12.x)
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121

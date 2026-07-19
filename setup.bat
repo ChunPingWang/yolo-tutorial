@@ -18,12 +18,20 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
+REM 建立虛擬環境
+if not exist "venv" (
+    echo.
+    echo [0/5] 建立虛擬環境...
+    python -m venv venv
+)
+call venv\Scripts\activate.bat
+
 echo.
-echo [1/4] 安裝 PyTorch (CUDA 12.x)...
+echo [1/5] 安裝 PyTorch (CUDA 12.x)...
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
 echo.
-echo [2/4] 安裝 Ultralytics (YOLOv11)...
+echo [2/5] 安裝 Ultralytics (YOLOv11)...
 pip install ultralytics
 
 echo.
